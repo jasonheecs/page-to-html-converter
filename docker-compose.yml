@@ -1,0 +1,8 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - ".:/usr/src/app"
+    ports:
+      - "9595:80"
