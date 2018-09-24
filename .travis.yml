@@ -12,6 +12,7 @@ before_install:
 
 script:
   - docker run --rm -i hadolint/hadolint < Dockerfile
+  - cd app && shellcheck -x ./*.sh
 
 notifications:
   email: false
