@@ -2,8 +2,11 @@
 
 require 'sinatra/base'
 require 'erb'
+require_relative 'helpers'
 
 class WikiConverter < Sinatra::Base
+  helpers Sinatra::WikiConverter::Helpers
+
   get '/' do
     erb :index, layout: true
   end
