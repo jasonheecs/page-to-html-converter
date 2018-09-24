@@ -1,7 +1,15 @@
 #!/usr/bin/env ruby
 
-require 'sinatra'
+require 'sinatra/base'
+require 'erb'
 
-get '/' do
-  'Hello World 4!'
+class WikiConverter < Sinatra::Base
+  get '/' do
+    erb :index, layout: true
+  end
+
+  post '/result' do
+    params.to_s
+  end
 end
+
