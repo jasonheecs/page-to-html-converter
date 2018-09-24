@@ -2,8 +2,9 @@ version: '3'
 services:
   web:
     build: .
+    image: wiki-converter:latest
     tty: true
     volumes:
-      - ".:/usr/src/app"
+      - "./app:/usr/src/app"
     ports:
-      - "9595:80"
+      - "4567:80"
