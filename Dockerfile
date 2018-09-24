@@ -20,13 +20,12 @@ RUN apk add --no-cache \
     grep='>3.0'
 
 # install build dependencies needed for certain Ruby gems in development group
-RUN if [ "${RACK_ENV}" == "dev" ]; then \
-        apk add --no-cache alpine-sdk; \
+RUN if [ "${RACK_ENV}" = "dev" ]; then \
+        apk add --no-cache alpine-sdk='>=0.5'; \
     fi
 
 WORKDIR /usr/src/app
-COPY Gemfile Gemfile.lock ./
+COPY ./app .
 RUN gem install bundler --version=1.16.5
-COPY . .
 
-CMD ["/bin/bash", "startup.sh"]
+CMD ["/bin/bash", "./startup.sh"]
