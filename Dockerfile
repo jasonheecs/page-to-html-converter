@@ -21,7 +21,7 @@ RUN apk add --no-cache \
 
 # install build dependencies needed for certain Ruby gems in development group
 RUN if [ "${RACK_ENV}" = "dev" ]; then \
-        apk add --no-cache alpine-sdk='>=0.5'; \
+        apk add --no-cache build-base='>=0.4'; \
     fi
 
 WORKDIR /usr/src/app
