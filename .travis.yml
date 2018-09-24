@@ -11,7 +11,7 @@ before_install:
   - docker pull hadolint/hadolint
 
 script:
-  - docker run -i hadolint/hadolint hadolint < ./Dockerfile
+  - docker run --rm -i hadolint/hadolint < Dockerfile
 
 notifications:
   email: false
