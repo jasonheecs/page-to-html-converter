@@ -1,0 +1,18 @@
+sudo: required
+services:
+  - docker
+
+language: ruby
+rvm:
+  - 2.5.1
+gemfile: app/Gemfile
+
+before_install:
+  - docker pull hadolint/hadolint
+
+script:
+  - docker run --rm -i hadolint/hadolint < Dockerfile
+  - cd app && shellcheck -x ./*.sh
+
+notifications:
+  email: false
