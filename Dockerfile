@@ -1,4 +1,4 @@
-ARG BUILD_ENV
+ARG BUILD_ENV='dev'
 
 FROM ruby:2.5.1-alpine AS base
 
