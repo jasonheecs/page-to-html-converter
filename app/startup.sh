@@ -1,10 +1,10 @@
 #!/bin/bash
 
+echo "Current environment is ${RACK_ENV}"
+
 if [ "${RACK_ENV}" == "production" ]; then
-  bundle install --without development test -j 20
   rackup -p 80
 else
-  bundle install -j 20
   if [ "${RACK_ENV}" == "test" ]; then
     rspec
   else

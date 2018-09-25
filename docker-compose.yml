@@ -1,10 +1,15 @@
 version: '3'
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        BUILD_ENV: ${BUILD_ENV:-dev}
     image: wiki-converter:latest
     tty: true
     volumes:
       - "./app:/usr/src/app"
     ports:
       - "4567:80"
+    environment:
+      - APP_DIRECTORY=${APP_DIRECTORY:-/usr/src/app}

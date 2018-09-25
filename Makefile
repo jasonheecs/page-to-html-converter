@@ -14,5 +14,8 @@ endif
 destroy:
 	docker-compose down
 
+update-gem:
+	docker-compose run web bundle install
+
 open:
 	open http://localhost:4567
