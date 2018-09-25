@@ -2,7 +2,7 @@ ARG BUILD_ENV='dev'
 
 FROM ruby:2.5.1-alpine AS base
 
-LABEL name="jasonheecs/wiki-converter"
+LABEL name="jasonheecs/html-converter"
 LABEL version="1.0.0"
 LABEL maintainer="hello@jasonhee.com"
 

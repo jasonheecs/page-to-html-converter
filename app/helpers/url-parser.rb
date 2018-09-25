@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'htmlentities'
 
 module Sinatra
-  module WikiConverter
+  module HTMLConverter
     module Helpers
       module URLParser
         def parse_url(url)
