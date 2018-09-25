@@ -3,3 +3,4 @@ docker-compose.yml
 .git
 .gitignore
 .travis.yml
+.env.example
