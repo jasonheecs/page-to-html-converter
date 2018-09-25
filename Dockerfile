@@ -25,9 +25,7 @@ RUN apk add --no-cache \
 # cache bundle install to speed up docker build
 COPY ./app/Gemfile* /tmp/
 WORKDIR /tmp
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle install --without development test -j 20 && \
-    bundle config --global frozen 1
+RUN bundle install --without development test -j 20
 
 
 # Build Docker image for development
@@ -37,6 +35,8 @@ RUN bundle config --delete without && bundle install -j 20
 
 # Build Docker image for production
 FROM base AS production
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
 
 # Select the right image depending on environment
 # hadolint ignore=DL3006

@@ -4,6 +4,13 @@ gem 'bundler'
 gem 'down'
 gem 'htmlentities'
 gem 'nokogiri'
+gem 'rake'
 gem 'sinatra'
 
 gem 'rerun', group: :development
+
+gem 'rack-test', group: :test
+
+group :test, :development do
+  gem 'rspec'
+end

@@ -8,6 +8,6 @@ else
   if [ "${RACK_ENV}" == "test" ]; then
     rspec
   else
-    bundle exec rerun --signal INT "rackup -p 80" >rerun.log 2>&1
+    bundle exec rerun "rackup -p 80" >rerun.log 2>&1
   fi
 fi
