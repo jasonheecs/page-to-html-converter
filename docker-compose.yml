@@ -5,7 +5,7 @@ services:
       context: .
       args:
         BUILD_ENV: ${BUILD_ENV:-dev}
-    image: wiki-converter:latest
+    image: html-converter:latest
     tty: true
     volumes:
       - "./app:/usr/src/app"
