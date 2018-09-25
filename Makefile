@@ -5,6 +5,7 @@ stop:
 	docker-compose stop
 
 build:
+	cd ./app && bundle install && cd ../
 ifdef nd
 	docker-compose up --build
 else

@@ -11,9 +11,6 @@ ARG BUILD_ENV
 ENV APP_DIRECTORY /usr/src/app
 ENV RACK_ENV=${BUILD_ENV}
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
-
 RUN apk add --no-cache \
     bash='>=4.0.0' \
     bash-completion='>=2.0' \
@@ -21,19 +18,20 @@ RUN apk add --no-cache \
     coreutils='>=8.0' \
     binutils='>=2.0' \
     findutils='>=4.0' \
-    grep='>3.0' && \
+    grep='>3.0' \
+    build-base='>=0.4' && \
     gem install bundler --version=1.16.5
 
 # cache bundle install to speed up docker build
 COPY ./app/Gemfile* /tmp/
 WORKDIR /tmp
-RUN bundle install --without development test -j 20
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle install --without development test -j 20 && \
+    bundle config --global frozen 1
 
 
 # Build Docker image for development
 FROM base AS dev
-# install build dependencies needed for certain Ruby gems in development group
-RUN apk add --no-cache build-base='>=0.4'
 RUN bundle config --delete without && bundle install -j 20
 
 

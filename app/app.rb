@@ -2,7 +2,7 @@
 
 require 'sinatra/base'
 require 'erb'
-require_relative 'helpers'
+require_relative 'helpers/url-parser'
 
 class WikiConverter < Sinatra::Base
   helpers Sinatra::WikiConverter::Helpers
