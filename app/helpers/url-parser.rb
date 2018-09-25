@@ -1,5 +1,6 @@
 require 'down'
 require 'nokogiri'
+require 'htmlentities'
 
 module Sinatra
   module WikiConverter
@@ -7,11 +8,12 @@ module Sinatra
       module URLParser
         def parse_url(url)
           html = Down.download(url)
-          Nokogiri::HTML(html)
+          Nokogiri::HTML.parse(html)
         end
 
         def get_body(url)
-          parse_url(url).css('body')
+          html = parse_url(url).css('body').to_s
+          HTMLEntities.new.encode(html)
         end
       end
     end
