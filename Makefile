@@ -18,7 +18,7 @@ destroy:
 
 update-gem:
 	cd ./app && bundle install && cd ../
-	docker-compose run web bundle install
+	docker-compose exec web /bin/bash -c "bundle install"
 
 open:
 	open http://localhost:4567
