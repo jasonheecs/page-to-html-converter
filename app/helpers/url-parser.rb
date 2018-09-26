@@ -7,6 +7,8 @@ module Sinatra
   module HTMLConverter
     module Helpers
       module URLParser
+        @attrs_to_not_strip = %w[src href colspan rowspan cols rows lang]
+
         def parse_url(url)
           if url !~ /\A#{URI::DEFAULT_PARSER.make_regexp}\z/
             raise URI::InvalidURIError
@@ -23,10 +25,22 @@ module Sinatra
           HTMLEntities.new.encode(html)
         end
 
+        def self.attrs_to_not_strip
+          @attrs_to_not_strip
+        end
+
         private
 
         def strip_attributes(doc)
-          doc.xpath("//@style|//@class|//@id").remove
+          @attrs_to_not_strip = %w[src href colspan rowspan cols rows lang]
+
+          attrs = @attrs_to_not_strip.map do |attr|
+            "local-name() != '#{attr}'"
+          end
+
+          attrs = attrs.join(' and ')
+          doc.xpath("//script|//style|//comment()|//@*[#{attrs}]").remove
+
           doc
         end
       end

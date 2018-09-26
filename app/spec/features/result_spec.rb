@@ -12,6 +12,8 @@ describe 'POST /result' do
 
     it 'is successful' do
       expect(last_response.ok?).to be true
+      attrs_to_not_strip = Sinatra::HTMLConverter::Helpers::URLParser.attrs_to_not_strip
+      expect(last_response.body).not_to include(*attrs_to_not_strip)
     end
   end
 
