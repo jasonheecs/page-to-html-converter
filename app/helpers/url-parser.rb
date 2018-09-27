@@ -21,8 +21,11 @@ module Sinatra
         def get_body(url)
           html = parse_url(url).css('body')
           html = strip_attributes(html)
-          html = html.css('body').to_html
-          html = html.force_encoding('UTF-8').encode(invalid: :replace)
+                 .css('body')
+                 .to_html
+                 .force_encoding('UTF-8')
+                 .encode(invalid: :replace)
+
           HTMLEntities.new.encode(html)
         end
 
