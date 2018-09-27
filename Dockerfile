@@ -1,6 +1,6 @@
 ARG BUILD_ENV='dev'
 
-FROM ruby:2.5.1-alpine AS base
+FROM jasonheecs/alpine-ruby AS base
 
 LABEL name="jasonheecs/html-converter"
 LABEL version="1.0.0"
@@ -11,16 +11,7 @@ ARG BUILD_ENV
 ENV APP_DIRECTORY /usr/src/app
 ENV RACK_ENV=${BUILD_ENV}
 
-RUN apk add --no-cache \
-    bash='>=4.0.0' \
-    bash-completion='>=2.0' \
-    util-linux='>=2.0' \
-    coreutils='>=8.0' \
-    binutils='>=2.0' \
-    findutils='>=4.0' \
-    grep='>3.0' \
-    build-base='>=0.4' && \
-    gem install bundler --version=1.16.5
+RUN gem install bundler --version=1.16.5
 
 # cache bundle install to speed up docker build
 COPY ./app/Gemfile* /tmp/
