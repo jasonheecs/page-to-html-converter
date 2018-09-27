@@ -15,13 +15,17 @@ module Sinatra
           end
 
           file = Down.download(url)
-          doc = Nokogiri::HTML.parse(file, nil, 'utf-8')
-          strip_attributes(doc)
+          Nokogiri::HTML.parse(file, nil, 'utf-8')
         end
 
         def get_body(url)
-          html = parse_url(url).css('body').to_s
-          html = html.force_encoding('UTF-8').encode(invalid: :replace)
+          html = parse_url(url).css('body')
+          html = strip_attributes(html)
+                 .css('body')
+                 .to_html
+                 .force_encoding('UTF-8')
+                 .encode(invalid: :replace)
+
           HTMLEntities.new.encode(html)
         end
 

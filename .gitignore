@@ -2,3 +2,5 @@
 .idea
 .env
 *.log
+node_modules
+public
