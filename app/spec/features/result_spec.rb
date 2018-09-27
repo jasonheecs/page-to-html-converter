@@ -15,7 +15,7 @@ describe 'POST /result' do
       expect(last_response.ok?).to be true
 
       attrs_to_strip = %w[id class style].map { |attr| "#{attr}=" }
-      doc = Nokogiri::HTML.parse(last_response.body).css('pre').first.to_s
+      doc = Nokogiri::HTML.parse(last_response.body).css('code').first.to_s
       expect(doc).not_to include(*attrs_to_strip)
     end
   end
