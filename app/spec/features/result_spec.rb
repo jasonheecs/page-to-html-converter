@@ -1,4 +1,5 @@
 require_relative '../spec_helper'
+require 'nokogiri'
 
 describe 'POST /result' do
   before do
@@ -12,8 +13,10 @@ describe 'POST /result' do
 
     it 'is successful' do
       expect(last_response.ok?).to be true
-      attrs_to_not_strip = Sinatra::HTMLConverter::Helpers::URLParser.attrs_to_not_strip
-      expect(last_response.body).not_to include(*attrs_to_not_strip)
+
+      attrs_to_strip = %w[id class style].map { |attr| "#{attr}=" }
+      doc = Nokogiri::HTML.parse(last_response.body).css('pre').first.to_s
+      expect(doc).not_to include(*attrs_to_strip)
     end
   end
 
