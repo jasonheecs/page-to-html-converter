@@ -1,6 +1,6 @@
 ARG BUILD_ENV='dev'
 
-FROM jasonheecs/alpine-ruby AS base
+FROM jasonheecs/alpine-ruby:latest AS base
 
 LABEL name="jasonheecs/html-converter"
 LABEL version="1.0.0"
