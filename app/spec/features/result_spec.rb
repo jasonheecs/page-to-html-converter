@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 require 'nokogiri'
 
-describe 'POST /result' do
+describe 'POST /result' do # rubocop:disable BlockLength
   before do
     post('/result', params)
   end
@@ -38,3 +40,4 @@ describe 'POST /result' do
     end
   end
 end
+# rubocop:enable

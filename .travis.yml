@@ -9,11 +9,12 @@ gemfile: app/Gemfile
 
 before_install:
   - docker pull hadolint/hadolint
+  - gem install overcommit && gem install rubocop
 
 script:
   - docker run --rm -i hadolint/hadolint < Dockerfile
-  - cd app && shellcheck -x ./*.sh
-  - bundle exec rake
+  - overcommit --sign && overcommit --run
+  - cd ./app && bundle exec rake
 
 notifications:
   email: false

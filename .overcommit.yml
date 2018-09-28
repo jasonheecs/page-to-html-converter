@@ -1,0 +1,14 @@
+PreCommit:
+  RuboCop:
+    enabled: true
+    on_warn: fail # Treat all warnings as failures
+
+  EsLint:
+    enabled: true
+    include: './app/**/*.js'
+
+  TrailingWhitespace:
+    enabled: true
+
+  ShellCheck:
+    enabled: true
