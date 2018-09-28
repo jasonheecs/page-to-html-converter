@@ -7,9 +7,6 @@ PreCommit:
     enabled: true
     include: './app/**/*.js'
 
-  Hadolint:
-    enabled: true
-
   TrailingWhitespace:
     enabled: true
 
