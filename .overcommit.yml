@@ -1,0 +1,22 @@
+PreCommit:
+  RuboCop:
+    enabled: true
+    on_warn: fail # Treat all warnings as failures
+
+  EsLint:
+    enabled: true
+    include: './app/**/*.js'
+
+  Hadolint:
+    enabled: true
+
+  TrailingWhitespace:
+    enabled: true
+
+  ShellCheck:
+    enabled: true
+
+PrePush:
+  RSpec:
+    enabled: true
+    command: ['cd', './app && ', 'bundle', 'exec', 'rdsdake']
