@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'down'
 require 'nokogiri'
 require 'htmlentities'
@@ -6,11 +8,12 @@ require 'uri'
 module Sinatra
   module HTMLConverter
     module Helpers
+      # Parses a web page to get HTML content
       module URLParser
         @attrs_to_not_strip = %w[src href colspan rowspan cols rows lang]
 
         def parse_url(url)
-          if url !~ /\A#{URI::DEFAULT_PARSER.make_regexp}\z/
+          if url.match?(/\A#{URI::DEFAULT_PARSER.make_regexp}\z/)
             raise URI::InvalidURIError
           end
 

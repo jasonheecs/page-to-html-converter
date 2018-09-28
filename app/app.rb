@@ -1,11 +1,12 @@
-#!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'sinatra/base'
 require 'down'
 require 'erb'
 require 'uri'
-require_relative 'helpers/url-parser'
+require_relative 'helpers/url_parser'
 
+# Main app class
 class HTMLConverter < Sinatra::Base
   helpers Sinatra::HTMLConverter::Helpers::URLParser
 
