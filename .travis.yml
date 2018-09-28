@@ -14,7 +14,7 @@ before_install:
 script:
   - docker run --rm -i hadolint/hadolint < Dockerfile
   - overcommit --sign && overcommit --run
-  - cp ./app && bundle exec rake
+  - cd ./app && bundle exec rake
 
 notifications:
   email: false
