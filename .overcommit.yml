@@ -15,8 +15,3 @@ PreCommit:
 
   ShellCheck:
     enabled: true
-
-PrePush:
-  RSpec:
-    enabled: true
-    command: ['cd', './app && ', 'bundle', 'exec', 'rdsdake']
