@@ -13,7 +13,7 @@ module Sinatra
         @attrs_to_not_strip = %w[src href colspan rowspan cols rows lang]
 
         def parse_url(url)
-          if url.match?(/\A#{URI::DEFAULT_PARSER.make_regexp}\z/)
+          unless url.match?(/\A#{URI::DEFAULT_PARSER.make_regexp}\z/)
             raise URI::InvalidURIError
           end
 
