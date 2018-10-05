@@ -10,6 +10,6 @@ services:
     volumes:
       - "./app:/usr/src/app"
     ports:
-      - "4567:80"
+      - ${HOST_PORT:-4567}:${PORT:-80}
     environment:
       - APP_DIRECTORY=${APP_DIRECTORY:-/usr/src/app}

@@ -8,6 +8,8 @@ LABEL maintainer="hello@jasonhee.com"
 
 ARG BUILD_ENV
 
+ENV HOST_PORT 4567
+ENV PORT 80
 ENV APP_DIRECTORY /usr/src/app
 ENV RACK_ENV=${BUILD_ENV}
 

@@ -3,4 +3,8 @@ docker-compose.yml
 .git
 .gitignore
 .travis.yml
+.env
 .env.example
+package.json
+package-lock.json
+npm-shrinkwrap.json
