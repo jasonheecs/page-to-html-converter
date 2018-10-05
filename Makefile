@@ -20,6 +20,11 @@ build:
 destroy:
 	docker-compose down
 
+rebuild:
+	make destroy
+	make build
+	make start
+
 update-gem:
 	cd $(app_dir) && bundle install && cd ../
 	docker-compose exec web /bin/bash -c "bundle install"
