@@ -4,9 +4,9 @@ docker-compose.yml
 .gitignore
 .travis.yml
 .env
-.env.example
 package.json
 package-lock.json
 npm-shrinkwrap.json
 node_modules
 .rerun
+coverage
