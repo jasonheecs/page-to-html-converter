@@ -3,11 +3,11 @@
 echo "Current environment is ${RACK_ENV}"
 
 if [ "${RACK_ENV}" == "production" ]; then
-  rackup -p 80
+  rackup -p "${PORT}"
 else
   if [ "${RACK_ENV}" == "test" ]; then
     rspec
   else
-    bundle exec rerun "rackup -p 80" >rerun.log 2>&1
+    bundle exec rerun "rackup -p ${PORT}" >rerun.log 2>&1
   fi
 fi

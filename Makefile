@@ -13,6 +13,7 @@ stop:
 	docker-compose stop
 
 build:
+	overcommit --install && overcommit --sign
 	cd $(app_dir) && bundle install && cd ../
 	docker-compose up --build -d
 
@@ -27,6 +28,7 @@ open:
 	open http://localhost:4567
 
 test:
+	overcommit --run
 	docker-compose exec -T web /bin/bash -c "bundle exec rake"
 
 exec:
