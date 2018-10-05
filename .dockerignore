@@ -8,3 +8,4 @@ docker-compose.yml
 package.json
 package-lock.json
 npm-shrinkwrap.json
+node_modules
