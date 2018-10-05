@@ -2,6 +2,7 @@ sudo: required
 services:
 - docker
 language: ruby
+cache: bundler
 rvm:
 - 2.5.1
 gemfile: app/Gemfile
@@ -12,13 +13,16 @@ script:
 - docker run --rm -i hadolint/hadolint < Dockerfile
 - overcommit --sign && overcommit --run
 - cd ./app && bundle exec rake
+after_success:
+- echo "${HEROKU_TOKEN}" | docker login -u _ --password-stdin registry.heroku.com
+before_deploy:
+- npm install && npm run bundle
+- cd ../
+deploy:
+  provider: script
+  script: bash "${TRAVIS_BUILD_DIR}/heroku_docker_push.sh"
+  skip_cleanup: true
+  on:
+    branch: heroku
 notifications:
   email: false
-deploy:
-  provider: heroku
-  api_key:
-    secure: h7+i25N4aAPrenCj/KmrKLAb3+vJJbtc7Gd1aEWUIdAsmcOOJX6typRGnkyi+0GrnhWim7HN+tVRTmlHfz+kdNZjsmEaM4gqHS69+bZi8vSp2DNqUn2+AkA+jkqaufQaKBazrk5IKR+0smqqIEQWChIfe6WExZBnebs1XdC3kpCqkI5zQ9VcN/czITyI9EEgWrNgN5fMMQrTuE90vR4czfN4O3NbzUmORaGBr5TZnumYKOTbaziyrg+CfmFfPk0YmUoakW7JiEMbvwO3jysV5MGmQbJWPSGH1RLUI0hd6DLOLinXORGEIteoYw7rQtcCLnZCwhdvXUPyAl8G2i+/Ul/aqPbmfaOdqXpetAwIRujXZHsD6i9Zq9cVND/RLklQverBC6yvEr9AqWnG0GtSqNTsJa4Eil73h1aZeAmJiUmudTS68xJzVqnMe0t/gvo6iYzDitrGGLeHQcsvWyCC+1ps7mR6zWTnMbxSxZgXwP6FXpyQRzbAL8MthLTOH/ucEmLarn4eybOWapRII+LuuEsWMCn9HNHcwmpjAPu0WqWPo8GFwPsu0GenZLC0uweGaJ1XNtTnA+tmIukNUat6dN5rCS4KBXqorAGPW3vjrnulwMHs/JSx0FaqirhtfMIygI43vYu1PgkkP3KY/l3JDNeuj612EYZ6phbmWGXLevY=
-  app: page-to-html
-  on:
-    repo: jasonheecs/page-to-html-converter
-  skip_cleanup: true
