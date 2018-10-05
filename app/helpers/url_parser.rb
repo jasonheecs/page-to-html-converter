@@ -10,8 +10,6 @@ module Sinatra
     module Helpers
       # Parses a web page to get HTML content
       module URLParser
-        @attrs_to_not_strip = %w[src href colspan rowspan cols rows lang]
-
         def parse_url(url)
           unless url.match?(/\A#{URI::DEFAULT_PARSER.make_regexp}\z/)
             raise URI::InvalidURIError
@@ -24,7 +22,9 @@ module Sinatra
         def get_body(url)
           html = parse_url(url).css('body')
           html = strip_attributes(html)
+          html = remove_empty_tags(html)
                  .css('body')
+                 .children
                  .to_html
                  .force_encoding('UTF-8')
                  .encode(invalid: :replace)
@@ -32,16 +32,14 @@ module Sinatra
           HTMLEntities.new.encode(html)
         end
 
-        def self.attrs_to_not_strip
-          @attrs_to_not_strip
+        def attrs_to_not_strip
+          @attrs_to_not_strip = %w[src href colspan rowspan cols rows lang]
         end
 
         private
 
         def strip_attributes(doc)
-          @attrs_to_not_strip = %w[src href colspan rowspan cols rows lang]
-
-          attrs = @attrs_to_not_strip.map do |attr|
+          attrs = attrs_to_not_strip.map do |attr|
             "local-name() != '#{attr}'"
           end
 
@@ -50,6 +48,15 @@ module Sinatra
 
           doc
         end
+
+        def remove_empty_tags(doc)
+          doc.css('body').search('*').find_all.each do |el|
+            el.remove if el.content.strip.empty?
+          end
+
+          doc
+        end
+
       end
     end
   end
