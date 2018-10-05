@@ -14,5 +14,6 @@ gem 'rerun', group: :development
 gem 'rack-test', group: :test
 
 group :test, :development do
+  gem 'coveralls', require: false
   gem 'rspec'
 end

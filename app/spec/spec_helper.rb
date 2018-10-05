@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'rack/test'
 
 require_relative File.join('..', 'app')
