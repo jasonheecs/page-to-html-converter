@@ -56,7 +56,6 @@ module Sinatra
 
           doc
         end
-
       end
     end
   end

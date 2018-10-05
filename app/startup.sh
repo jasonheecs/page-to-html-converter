@@ -3,7 +3,7 @@
 echo "Current environment is ${RACK_ENV}"
 
 if [ "${RACK_ENV}" == "production" ]; then
-  rackup -p ${PORT}
+  rackup -p "${PORT}"
 else
   if [ "${RACK_ENV}" == "test" ]; then
     rspec
