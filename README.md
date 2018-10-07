@@ -22,7 +22,7 @@ make build && make start
 ```
 
 ## Testing
-Testing consists of [various linting tools](.overcommit.yml) and [Rspec tests](./spec).
+Testing consists of [various linting tools](.overcommit.yml) and [Rspec tests](./app/spec).
 
 To run tests, make sure you are in the project root and run:
 ```bash
