@@ -6,6 +6,8 @@ This app will scrape a url and return the page's HTML source, but without the HT
 
 App is hosted at [https://page-to-html.herokuapp.com/](https://page-to-html.herokuapp.com/)
 
+![example](https://i.imgur.com/GMlpuR6.gif "Example")
+
 ## Prerequisites
 - Docker >= 18.01
 - npm >= 5.3.0
